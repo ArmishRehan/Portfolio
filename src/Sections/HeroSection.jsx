@@ -20,8 +20,7 @@ export const HeroSection = () => {
                     </h1>
 
                     <p className="text-lg md:text-xl text-muted-foreground max-2-2xl mx-auto opacity-0 animate-fade-in-delay-3">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos excepturi eligendi amet
-                        blanditiis consectetur hic porro saepe voluptates sint repellat.
+                        As a computer engineer, I design and develop dynamic, responsive websites that turn ideas into functional digital experiences.
                     </p>
                     <div>
                         <a href="#projects" className="  cosmic-button opacity-0 animate-fade-in-delay-4">

@@ -22,7 +22,7 @@ export const AboutSection = () => {
                         className="space-y-6"
                         >
                         <h3 className="text-2xl font-semibold">
-                            Passionate Web Developer and XYZ
+                           Computer Engineer • Web Developer 
                         </h3>
 
                         {/* Image only on mobile, below heading */}
@@ -35,17 +35,16 @@ export const AboutSection = () => {
                         </div>
                         
                         <p className="text-muted-foreground">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                            Quasi a harum nisi amet minus ex cupiditate saepe tempore ut. 
-                            Voluptatum atque nobis accusantium, alias tenetur consectetur? 
-                            Fugiat voluptatibus repellendus molestiae.
+                            Hi, I’m Armish a Computer Engineer and Web Developer who loves blending creativity with logic.
+                            My journey into web development began with a fascination for how design and code come together
+                            to create something interactive and meaningful. I enjoy building responsive, user-friendly websites
+                            that tell stories, solve problems, and bring ideas to life in a clean, elegant way.
                         </p>
 
                         <p className="text-muted-foreground">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                            Quasi a harum nisi amet minus ex cupiditate saepe tempore ut. 
-                            Voluptatum atque nobis accusantium, alias tenetur consectetur? 
-                            Fugiat voluptatibus repellendus molestiae.
+                            Technology for me is more than just code it’s about learning, experimenting, and constantly improving.
+                            I value attention to detail, purposeful design, and the process of turning imagination into real digital experiences.
+                            Every project I work on is an opportunity to grow, explore new tools, and craft something that leaves a lasting impact.
                         </p>
                         
                         <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center">

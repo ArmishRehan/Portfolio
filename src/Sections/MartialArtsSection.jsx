@@ -3,19 +3,20 @@ import { Award } from "lucide-react";
 
 export const MartialArtsSection = () => {
     const certificates = [
-        {
-            title: "1st Dan Black Belt Certificate",
-            link: "src/assets/profile_img.jpg",
-            icon: <Award className="w-6 h-6 text-primary" />,
-        },
-        {
+         {
             title: "2nd Dan Black Belt Certificate",
             link: "https://drive.google.com/file/d/12AfffcwXqpHzsokDwvAnd459RdU_PrPv/view?usp=drive_link",
             icon: <Award className="w-6 h-6 text-primary" />,
         },
         {
+            title: "1st Dan Black Belt Certificate",
+            link: "https://drive.google.com/file/d/1ia6CFfeWgj-5OwQEISRhgGtPJyI-QW4p/view?usp=drive_link",
+            icon: <Award className="w-6 h-6 text-primary" />,
+        },
+       
+        {
             title: "Competition Participation",
-            link: "src/assets/profile_img.jpg",
+            link: "https://drive.google.com/file/d/1UvsMRb9bEDxyYiFXsNKThoTLUVGRZ2ym/view?usp=drive_link",
             icon: <Award className="w-6 h-6 text-primary" />,
         },
     ];
@@ -37,17 +38,12 @@ export const MartialArtsSection = () => {
                         className="space-y-6"
                     >
                         <p className="text-lg text-muted-foreground">
-                            I have been practicing martial arts for several years, focusing
-                            mainly on Taekwondo. Through dedication and hard work, I have
-                            earned multiple certifications and participated in national-level
-                            competitions. Martial arts has shaped my discipline, confidence,
-                            and strength, both physically and mentally.
+                            I am a World Taekwondo–certified 2nd Dan Black Belt and an Asian Bronze Medalist.
+                            With nearly eight years of dedicated training, Taekwondo has shaped my mindset teaching me focus,
+                            discipline, and perseverance. It’s more than a sport to me; it’s a lifelong journey that continues
+                            to strengthen both my body and character.
                         </p>
 
-                        <p className="text-lg text-muted-foreground">
-                            Below are some of my certifications and achievements you can
-                            explore:
-                        </p>
                     </motion.div>
 
                     {/* Right Side */}
