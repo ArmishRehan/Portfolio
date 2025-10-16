@@ -30,7 +30,7 @@ export default function ContactSection() {
       <div className="container mx-auto max-w-3xl md:max-w-4xl">
         {/* Title */}
         <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center">
-          Contact <span className="text-primary">Me</span>
+          Let's <span className="text-primary">Connect</span>
         </h2>
         <p className="text-base md:text-lg text-muted-foreground mb-12 text-center leading-relaxed">
           Have a question, collaboration idea, or just want to say hello?  

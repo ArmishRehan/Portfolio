@@ -214,8 +214,12 @@ export default function Galaxy({
     let program;
 
     function resize() {
-      const scale = 1;
-      renderer.setSize(ctn.offsetWidth * scale, ctn.offsetHeight * scale);
+      // cap device pixel ratio to avoid excessive GPU work on high-DPR displays
+      const maxDPR = 1.5;
+      const dpr = Math.min(window.devicePixelRatio || 1, maxDPR);
+      const width = Math.max(1, Math.floor(ctn.offsetWidth * dpr));
+      const height = Math.max(1, Math.floor(ctn.offsetHeight * dpr));
+      renderer.setSize(width, height);
       if (program) {
         program.uniforms.uResolution.value = new Color(
           gl.canvas.width,
@@ -224,7 +228,13 @@ export default function Galaxy({
         );
       }
     }
-    window.addEventListener('resize', resize, false);
+    // debounce resize to avoid thrashing
+    let resizeTimer;
+    function onResizeDebounced(){
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(resize, 150);
+    }
+    window.addEventListener('resize', onResizeDebounced, false);
     resize();
 
     const geometry = new Triangle(gl);
@@ -260,12 +270,33 @@ export default function Galaxy({
     const mesh = new Mesh(gl, { geometry, program });
     let animateId;
 
+    // Throttled RAF loop to reduce CPU/GPU on weak devices
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const targetFPS = 45; // reasonable target for smoother experience
+    const frameInterval = 1000 / targetFPS;
+    let lastFrameTime = 0;
+
     function update(t) {
       animateId = requestAnimationFrame(update);
-      if (!disableAnimation) {
-        program.uniforms.uTime.value = t * 0.001;
-        program.uniforms.uStarSpeed.value = (t * 0.001 * starSpeed) / 10.0;
+
+      if (disableAnimation || reduceMotion) return;
+
+      // frame limiting
+      if (t - lastFrameTime < frameInterval) {
+        // still update smoothing but skip heavy render
+        const lerpFactor = 0.05;
+        smoothMousePos.current.x += (targetMousePos.current.x - smoothMousePos.current.x) * lerpFactor;
+        smoothMousePos.current.y += (targetMousePos.current.y - smoothMousePos.current.y) * lerpFactor;
+        smoothMouseActive.current += (targetMouseActive.current - smoothMouseActive.current) * lerpFactor;
+        program.uniforms.uMouse.value[0] = smoothMousePos.current.x;
+        program.uniforms.uMouse.value[1] = smoothMousePos.current.y;
+        program.uniforms.uMouseActiveFactor.value = smoothMouseActive.current;
+        return;
       }
+
+      lastFrameTime = t;
+      program.uniforms.uTime.value = t * 0.001;
+      program.uniforms.uStarSpeed.value = (t * 0.001 * starSpeed) / 10.0;
 
       const lerpFactor = 0.05;
       smoothMousePos.current.x += (targetMousePos.current.x - smoothMousePos.current.x) * lerpFactor;
@@ -279,7 +310,7 @@ export default function Galaxy({
 
       renderer.render({ scene: mesh });
     }
-    animateId = requestAnimationFrame(update);
+    if (!reduceMotion && !disableAnimation) animateId = requestAnimationFrame(update);
     ctn.appendChild(gl.canvas);
 
     function handleMouseMove(e) {
@@ -299,9 +330,20 @@ export default function Galaxy({
       ctn.addEventListener('mouseleave', handleMouseLeave);
     }
 
+    function handleVisibility() {
+      if (document.hidden) {
+        cancelAnimationFrame(animateId);
+      } else {
+        if (!reduceMotion && !disableAnimation) animateId = requestAnimationFrame(update);
+      }
+    }
+
+    document.addEventListener('visibilitychange', handleVisibility);
+
     return () => {
       cancelAnimationFrame(animateId);
-      window.removeEventListener('resize', resize);
+      window.removeEventListener('resize', onResizeDebounced);
+      document.removeEventListener('visibilitychange', handleVisibility);
       if (mouseInteraction) {
         ctn.removeEventListener('mousemove', handleMouseMove);
         ctn.removeEventListener('mouseleave', handleMouseLeave);

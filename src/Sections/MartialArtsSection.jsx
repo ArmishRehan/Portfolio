@@ -25,7 +25,7 @@ export const MartialArtsSection = () => {
         <section id="martial-arts" className="py-24 px-2 relative">
             <div className="container mx-auto max-w-5xl">
                 
-                <h2 className="text-3xl md:text-4xl font-bold mb-12">
+                <h2 className="text-3xl md:text-4xl text-center font-bold mb-12">
                     Martial<span className="text-primary"> Arts</span>
                 </h2>
 

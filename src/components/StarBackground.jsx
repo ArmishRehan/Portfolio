@@ -9,17 +9,21 @@ export const StarBackground = () => {
         generateStars();
         generateMeteors();
 
+        let resizeTimer;
         const handleResize = () =>{
-            generateStars();
-    };
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => generateStars(), 200);
+        };
 
     window.addEventListener("resize" , handleResize);
-    return  () => window.removeEventListener("resize" , handleResize)       
+    return  () => window.removeEventListener("resize" , handleResize)
     }, []);
 
 
     const generateStars = () => {
-        const numberOfStars = Math.floor(window.innerHeight * window.innerWidth / 10000);
+    const maxStars = 250;
+    const calculated = Math.floor(window.innerHeight * window.innerWidth / 10000);
+    const numberOfStars = Math.min(calculated, maxStars);
 
         const newStars = [];
 

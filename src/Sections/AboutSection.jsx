@@ -8,8 +8,8 @@ export const AboutSection = () => {
     
 
             <div className="container mx-auto max-w-5xl">
-                <h2 className="text-3xl md:text-4xl font-bold mb-12">
-                    About<span className="text-primary"> Me</span>
+                <h2 className="text-3xl sm:text-4xl md:text-4xl font-bold mb-12 text-center">
+                    Who<span className="text-primary"> I Am</span>
                 </h2>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
@@ -35,10 +35,10 @@ export const AboutSection = () => {
                         </div>
                         
                         <p className="text-muted-foreground">
-                            Hi, I’m Armish a Computer Engineer and Web Developer who loves blending creativity with logic.
-                            My journey into web development began with a fascination for how design and code come together
-                            to create something interactive and meaningful. I enjoy building responsive, user-friendly websites
-                            that tell stories, solve problems, and bring ideas to life in a clean, elegant way.
+                            Hi, I’m Armish a Computer Engineer and Web Developer who loves
+                            blending creativity with logic. I enjoy designing and developing
+                            responsive, user-friendly websites that tell stories and deliver
+                            meaningful digital experiences.
                         </p>
 
                         <p className="text-muted-foreground">
