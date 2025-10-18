@@ -1,4 +1,5 @@
 import {motion} from "framer-motion";
+import profile_img from "../assets/profile_img.jpg";
 
 
 export const AboutSection = () => {
@@ -28,7 +29,7 @@ export const AboutSection = () => {
                         {/* Image only on mobile, below heading */}
                         <div className="md:hidden flex justify-center">
                             <img 
-                                src="src/assets/profile_img.jpg" 
+                                src={profile_img} 
                                 alt="Profile" 
                                 className="rounded-full"
                             />
@@ -49,7 +50,7 @@ export const AboutSection = () => {
                         
                         <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center">
                             <a href="#contact" className="cosmic-button">Get In Touch</a>
-                            <a href="src/assets/Resume.pdf" className="frosted-button">Download CV</a>
+                            <a href="https://drive.google.com/file/d/1iBCGsrfeCLN7jSjKgMw5GPL3zMSVv6FC/view?usp=drive_link" className="frosted-button">Download CV</a>
                         </div>
                         </motion.div>
                     </div>

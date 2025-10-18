@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 
-export const StarBackground = () => {
+export default function StarBackground () {
     const [stars, setStars] = useState([]);
     const [meteors, setMeteors] = useState([]);
 
@@ -41,7 +41,7 @@ export const StarBackground = () => {
     };
 
     const generateMeteors = () => {
-        const numberOfMeteors = 4;
+        const numberOfMeteors = 2;
 
         const newMeteors = [];
 

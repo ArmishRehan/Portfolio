@@ -11,7 +11,7 @@ const navItems = [
   { name: "Education", href: "#education" },
   { name: "Martial Arts", href: "#martial-arts" },
   { name: "Contact", href: "#contact" },
-  { name: "Get Resume", href: "src/assets/Resume.pdf" }
+  { name: "Get Resume", href: "https://drive.google.com/file/d/1iBCGsrfeCLN7jSjKgMw5GPL3zMSVv6FC/view?usp=drive_link" }
 ];
 
 export const Navbar = () => {

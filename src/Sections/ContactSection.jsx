@@ -1,27 +1,42 @@
 import emailjs from "@emailjs/browser";
 import { useRef, useState } from "react";
-import { Mail, User, MessageSquare, Tag, Linkedin, Github } from "lucide-react";
+import {
+  Mail,
+  User,
+  MessageSquare,
+  Tag,
+  Linkedin,
+  Github,
+  X,
+  CheckCircle2,
+  AlertCircle,
+} from "lucide-react";
 
 export default function ContactSection() {
   const form = useRef();
   const [status, setStatus] = useState("");
+  const [statusType, setStatusType] = useState(""); // "success" or "error"
 
   const sendEmail = (e) => {
     e.preventDefault();
 
     emailjs
       .sendForm(
-        "service_zchkd1d",     // Your EmailJS service ID
-        "template_xnir5or",    // Your EmailJS template ID
+        "service_zchkd1d",
+        "template_xnir5or",
         form.current,
-        "eCCS1gTTSHMRbl8Ip"    // Your public key
+        "eCCS1gTTSHMRbl8Ip"
       )
       .then(
         () => {
-          setStatus("✅ Message sent successfully!");
+          setStatus("Message sent successfully!");
+          setStatusType("success");
           form.current.reset();
         },
-        () => setStatus("❌ Failed to send. Try again later.")
+        () => {
+          setStatus("Failed to send. Try again later.");
+          setStatusType("error");
+        }
       );
   };
 
@@ -33,7 +48,7 @@ export default function ContactSection() {
           Let's <span className="text-primary">Connect</span>
         </h2>
         <p className="text-base md:text-lg text-muted-foreground mb-12 text-center leading-relaxed">
-          Have a question, collaboration idea, or just want to say hello?  
+          Have a question, collaboration idea, or just want to say hello?
           Fill out the form below and I’ll get back to you soon.
         </p>
 
@@ -79,7 +94,7 @@ export default function ContactSection() {
             <Tag className="w-5 h-5 text-primary" />
             <input
               type="text"
-              name="title"   // Matches {{title}} in your EmailJS template
+              name="title"
               placeholder="Subject"
               className="bg-transparent flex-1 outline-none text-sm md:text-base placeholder:text-muted-foreground"
               required
@@ -110,18 +125,40 @@ export default function ContactSection() {
             ></textarea>
           </div>
 
-          {/* Submit Button */}
-          <button
-            type="submit"
-            className="p-3 md:p-4 bg-primary text-white font-medium rounded-2xl hover:bg-primary/80 transition w-full md:w-auto mx-auto"
-          >
-            Send Message
-          </button>
+          {/* Responsive Submit Button */}
+          <div className="flex justify-center w-full">
+            <button
+              type="submit"
+              className="cosmic-button w-full sm:w-1/2 lg:w-1/3 mt-2"
+            >
+              Send
+            </button>
+          </div>
+
+
         </form>
 
-        {/* Status Message */}
+        {/* Responsive Notification Toast */}
         {status && (
-          <p className="mt-6 text-center text-base md:text-lg">{status}</p>
+          <div
+            className={`fixed bottom-4 left-1/2 sm:left-auto sm:right-6 transform -translate-x-1/2 sm:translate-x-0 flex items-center gap-3 px-4 py-3 rounded-xl shadow-lg backdrop-blur-md text-sm md:text-base z-50 ${statusType === "success"
+              ? "bg-green-500/10 text-green-400 border border-green-400/30"
+              : "bg-red-500/10 text-red-400 border border-red-400/30"
+              }`}
+          >
+            {statusType === "success" ? (
+              <CheckCircle2 size={18} />
+            ) : (
+              <AlertCircle size={18} />
+            )}
+            <span>{status}</span>
+            <button
+              onClick={() => setStatus("")}
+              className="ml-2 text-muted-foreground hover:text-white transition"
+            >
+              <X size={16} />
+            </button>
+          </div>
         )}
       </div>
     </section>
